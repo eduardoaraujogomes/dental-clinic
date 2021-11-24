@@ -1,4 +1,4 @@
-package com.example.dentalclinic.services.impl;
+package com.example.dentalclinic.services;
 
 import java.util.List;
 
