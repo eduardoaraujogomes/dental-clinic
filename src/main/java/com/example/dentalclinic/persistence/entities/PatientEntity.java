@@ -22,7 +22,7 @@ public class PatientEntity {
     @Column(name="surname")
     private String surname;
 
-    @OneToOne(mappedBy = "patient", fetch= FetchType.LAZY)
+    @OneToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "address_id")
     private AddressEntity address;
-
 }

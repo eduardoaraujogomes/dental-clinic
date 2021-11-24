@@ -21,9 +21,5 @@ public class AddressEntity {
     @Column(name="number")
     private String number;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name="patient_id")
-    private  PatientEntity patient;
-
 
 }
