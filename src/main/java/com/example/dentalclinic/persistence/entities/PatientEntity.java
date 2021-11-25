@@ -1,5 +1,6 @@
 package com.example.dentalclinic.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +24,7 @@ public class PatientEntity {
     @Column(name="surname")
     private String surname;
 
-    @OneToOne(fetch= FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(fetch= FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 }
