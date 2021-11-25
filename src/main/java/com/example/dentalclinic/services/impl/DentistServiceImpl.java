@@ -29,12 +29,13 @@ public class DentistServiceImpl implements DentalClinicService<DentistEntity> {
     public DentistEntity update(Integer id, DentistEntity dentistEntity) {
         if(dentistRepository.findById(id).isPresent()){
             DentistEntity dentist = dentistRepository.findById(id).get();
+            if(dentistEntity.getRegistrationNumber() != null)
+                dentist.setRegistrationNumber(dentistEntity.getRegistrationNumber());
             if(dentistEntity.getName() != null)
                 dentist.setName(dentistEntity.getName());
             if(dentistEntity.getSurname() != null)
                 dentist.setSurname(dentistEntity.getSurname());
-            if(dentistEntity.getRegistrationNumber() != null)
-                dentist.setRegistrationNumber(dentistEntity.getRegistrationNumber());
+            return dentistRepository.saveAndFlush(dentist);
         }
         return null;
     }

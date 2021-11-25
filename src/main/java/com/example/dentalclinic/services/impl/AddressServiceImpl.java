@@ -34,7 +34,6 @@ public class AddressServiceImpl implements DentalClinicService<AddressEntity> {
                   address.setStreet(addressEntity.getStreet());
               if(addressEntity.getNumber() != null)
                   address.setNumber(addressEntity.getNumber());
-
               return addressRepository.saveAndFlush(address);
           }
           return null;
