@@ -30,8 +30,11 @@ public class AddressServiceImpl implements DentalClinicService<AddressEntity> {
     public AddressEntity update(Integer id, AddressEntity addressEntity) {
           if(addressRepository.findById(id).isPresent()) {
               AddressEntity address = addressRepository.findById(id).get();
-              address.setStreet(addressEntity.getStreet());
-              address.setNumber(addressEntity.getNumber());
+              if(addressEntity.getStreet() != null)
+                  address.setStreet(addressEntity.getStreet());
+              if(addressEntity.getNumber() != null)
+                  address.setNumber(addressEntity.getNumber());
+
               return addressRepository.saveAndFlush(address);
           }
           return null;
@@ -39,9 +42,8 @@ public class AddressServiceImpl implements DentalClinicService<AddressEntity> {
 
     @Override
     public AddressEntity searchById(Integer id) {
-        if(addressRepository.findById(id).isPresent()) {
+        if(addressRepository.findById(id).isPresent())
             return addressRepository.findById(id).get();
-        }
         return null;
     }
 

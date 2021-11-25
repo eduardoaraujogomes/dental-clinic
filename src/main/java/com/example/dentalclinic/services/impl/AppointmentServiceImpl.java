@@ -4,17 +4,22 @@ import com.example.dentalclinic.persistence.entities.AppointmentEntity;
 import com.example.dentalclinic.persistence.repository.AppointmentRepository;
 import com.example.dentalclinic.services.DentalClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AppointmentServiceImpl implements DentalClinicService<AppointmentEntity> {
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+
 
     @Autowired
     private PatientServiceImpl patientService;
 
-    @Autowired DentistServiceImpl dentistService;
+    @Autowired
+    private DentistServiceImpl dentistService;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     @Override
     public AppointmentEntity save(AppointmentEntity appointmentEntity) {
@@ -32,8 +37,10 @@ public class AppointmentServiceImpl implements DentalClinicService<AppointmentEn
     public AppointmentEntity update(Integer id, AppointmentEntity appointmentEntity){
         if(appointmentRepository.findById(id).isPresent()) {
             AppointmentEntity appointment = appointmentRepository.findById(id).get();
-            appointment.setPatient(appointmentEntity.getPatient());
-            appointment.setDentist(appointmentEntity.getDentist());
+            if(appointmentEntity.getPatient() != null)
+                appointment.setPatient(appointmentEntity.getPatient());
+            if(appointmentEntity.getDentist() != null)
+                appointment.setDentist(appointmentEntity.getDentist());
             return appointmentRepository.save(appointment);
         }
         return null;
@@ -41,16 +48,14 @@ public class AppointmentServiceImpl implements DentalClinicService<AppointmentEn
 
     @Override
     public AppointmentEntity searchById(Integer id) {
-        if(appointmentRepository.findById(id).isPresent()) {
+        if(appointmentRepository.findById(id).isPresent())
             return appointmentRepository.findById(id).get();
-        }
         return null;
     }
 
     @Override
     public void delete(Integer id) {
-          if (appointmentRepository.findById(id).isPresent()) {
+          if (appointmentRepository.findById(id).isPresent())
              appointmentRepository.deleteById(id);
-          }
     }
 }
