@@ -31,7 +31,7 @@ public class DentistController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteDentist(@PathVariable Integer id){
         dentistService.delete(id);
-        return ResponseEntity.ok("Paciente deletado com sucesso");
+        return ResponseEntity.ok("Dentist deletado com sucesso");
     }
 
     @PutMapping("/update/{id}")
