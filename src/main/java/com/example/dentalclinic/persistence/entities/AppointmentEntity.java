@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "appointments")
 public class AppointmentEntity {
 
