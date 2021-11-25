@@ -23,21 +23,32 @@ public class AddressServiceImpl implements DentalClinicService<AddressEntity> {
 
     @Override
     public List<AddressEntity> searchAll() {
-        return null;
+        return addressRepository.findAll();
     }
 
     @Override
     public AddressEntity update(Integer id, AddressEntity addressEntity) {
-        return null;
+          if(addressRepository.findById(id).isPresent()) {
+              AddressEntity address = addressRepository.findById(id).get();
+              address.setStreet(addressEntity.getStreet());
+              address.setNumber(addressEntity.getNumber());
+              return addressRepository.saveAndFlush(address);
+          }
+          return null;
     }
 
     @Override
     public AddressEntity searchById(Integer id) {
+        if(addressRepository.findById(id).isPresent()) {
+            return addressRepository.findById(id).get();
+        }
         return null;
     }
 
     @Override
     public void delete(Integer id) {
-
+        if (addressRepository.findById(id).isPresent()) {
+            addressRepository.deleteById(id);
+        }
     }
 }
