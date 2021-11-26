@@ -1,5 +1,6 @@
 package com.example.dentalclinic.persistence.entities;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,12 +18,15 @@ public class AppointmentEntity {
     @Column(name="id")
     private Integer id;
 
-    @OneToOne(fetch= FetchType.EAGER)
+    @OneToOne(fetch= FetchType.EAGER, targetEntity = PatientEntity.class)
     @JoinColumn(name = "patient_id")
     private PatientEntity patient;
 
-    @OneToOne(fetch= FetchType.EAGER)
+
+    @OneToOne(fetch= FetchType.EAGER, targetEntity = DentistEntity.class)
     @JoinColumn(name = "dentist_id")
     private DentistEntity dentist;
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.dentalclinic.persistence.entities;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
