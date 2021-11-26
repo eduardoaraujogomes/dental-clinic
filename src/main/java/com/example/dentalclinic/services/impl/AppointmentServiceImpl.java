@@ -23,7 +23,11 @@ public class AppointmentServiceImpl implements DentalClinicService<AppointmentEn
 
     @Override
     public AppointmentEntity save(AppointmentEntity appointmentEntity) {
+        if(appointmentEntity.getPatient() == null)
+            return null;
         appointmentEntity.setPatient(patientService.searchById(appointmentEntity.getPatient().getId()));
+        if(appointmentEntity.getDentist() == null)
+            return null;
         appointmentEntity.setDentist(dentistService.searchById(appointmentEntity.getDentist().getId()));
         return appointmentRepository.save(appointmentEntity);
     }
