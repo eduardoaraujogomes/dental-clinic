@@ -20,31 +20,31 @@ public class AppointmentController {
 
     @PostMapping("/save")
     public ResponseEntity<AppointmentEntity> saveAppointment(@RequestBody AppointmentEntity appointment) {
-        logger.info("Salvando novo agendamento");
+        logger.info("Saving a new appointment");
         return ResponseEntity.ok(appointmentService.save(appointment));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentEntity> getAppointment(@PathVariable Integer id){
-        logger.info("Buscando agendamento pelo id: " + id);
+        logger.info("Searching appointment by id: " + id);
         return ResponseEntity.ok(appointmentService.searchById(id));
     }
 
     @GetMapping("/get_all")
     public ResponseEntity<List<AppointmentEntity>> getAllAppointments(){
-        logger.info("Buscando todos os agendamentos");
+        logger.info("Searching all appointments");
         return ResponseEntity.ok(appointmentService.searchAll());
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAppointment(@PathVariable Integer id){
-        logger.info("Deletando agendamento pelo id: " + id);
+        logger.info("Deleting appointment by id: " + id);
         appointmentService.delete(id);
-        return ResponseEntity.ok("Appointment deletado com sucesso");
+        return ResponseEntity.ok("Appointment successfully deleted");
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<AppointmentEntity> updateAppointment(@PathVariable Integer id,@RequestBody AppointmentEntity appointment){
-        logger .info("Atualizando agendamento pelo id: " + id);
+        logger .info("Updating  appointment by id: " + id);
         return ResponseEntity.ok(appointmentService.update(id, appointment));
     }
 }

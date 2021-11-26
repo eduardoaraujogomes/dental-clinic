@@ -20,26 +20,26 @@ public class PatientController {
 
     @PostMapping("/save")
     public ResponseEntity<PatientEntity> savePatient(@RequestBody PatientEntity patient) {
-        logger.info("Salvando paciente: " + patient.getName());
+        logger.info("Saving patient: " + patient.getName());
         return ResponseEntity.ok(patientService.save(patient));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PatientEntity> getPatient(@PathVariable Integer id){
-        logger.info("Buscando paciente com id: " + id );
+        logger.info("Searching patient by id: " + id );
         return ResponseEntity.ok(patientService.searchById(id));
     }
 
     @GetMapping("/get_all")
     public ResponseEntity<List<PatientEntity>> getAllPatients(){
-        logger.info("Buscando todos os pacientes");
+        logger.info("Searching all patients");
         return ResponseEntity.ok(patientService.searchAll());
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Integer id){
-        logger.info("Deletando paciente com id: " + id);
+        logger.info("Deleting patient by id: " + id);
         patientService.delete(id);
-       return ResponseEntity.ok("Paciente deletado com sucesso");
+       return ResponseEntity.ok("Patient successfully deleted");
     }
 
     @PutMapping("/update/{id}")
