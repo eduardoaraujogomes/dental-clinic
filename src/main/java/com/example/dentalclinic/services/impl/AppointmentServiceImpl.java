@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public class AppointmentServiceImpl implements DentalClinicService<AppointmentEntity> {
 
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 
     @Autowired
     private PatientServiceImpl patientService;
@@ -18,13 +20,11 @@ public class AppointmentServiceImpl implements DentalClinicService<AppointmentEn
     @Autowired
     private DentistServiceImpl dentistService;
 
-    @Autowired
-    private AppointmentRepository appointmentRepository;
 
     @Override
     public AppointmentEntity save(AppointmentEntity appointmentEntity) {
-        patientService.save(appointmentEntity.getPatient());
-        dentistService.save(appointmentEntity.getDentist());
+        appointmentEntity.setPatient(patientService.searchById(appointmentEntity.getPatient().getId()));
+        appointmentEntity.setDentist(dentistService.searchById(appointmentEntity.getDentist().getId()));
         return appointmentRepository.save(appointmentEntity);
     }
 
@@ -38,9 +38,9 @@ public class AppointmentServiceImpl implements DentalClinicService<AppointmentEn
         if(appointmentRepository.findById(id).isPresent()) {
             AppointmentEntity appointment = appointmentRepository.findById(id).get();
             if(appointmentEntity.getPatient() != null)
-                appointment.setPatient(appointmentEntity.getPatient());
+                appointment.setPatient(patientService.searchById(appointmentEntity.getPatient().getId()));
             if(appointmentEntity.getDentist() != null)
-                appointment.setDentist(appointmentEntity.getDentist());
+                appointment.setDentist(dentistService.searchById(appointmentEntity.getDentist().getId()));
             return appointmentRepository.save(appointment);
         }
         return null;
